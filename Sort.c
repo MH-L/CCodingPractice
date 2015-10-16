@@ -7,7 +7,8 @@ int main() {
 	arr[3] = 15;
 	arr[4] = 10;
 	arr[5] = 12;
-	inPlaceBubbleSort(arr, 6);
+	printf("%d,%d,%d,%d,%d,%d\n", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
+	inPlaceSelectionSort(arr, 6);
 	printf("%d,%d,%d,%d,%d,%d", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
 }
 
@@ -28,5 +29,21 @@ void inPlaceBubbleSort(int* arr, int size) {
 			isSorted = 1;
 		else
 			noProb = 1;
+	}
+}
+
+void inPlaceSelectionSort(int* arr, int size) {
+	int ctr = 0;
+	int maxIndex = ctr;
+	while (ctr < size) {
+		for (int i = ctr; i < size; i++) {
+			if (arr[i] > arr[maxIndex]) {
+				maxIndex = i;
+			}
+		}
+		int temp = arr[ctr];
+		arr[ctr] = arr[maxIndex];
+		arr[maxIndex] = temp;
+		ctr++;
 	}
 }
