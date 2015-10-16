@@ -45,5 +45,10 @@ void inPlaceSelectionSort(int* arr, int size) {
 		arr[ctr] = arr[maxIndex];
 		arr[maxIndex] = temp;
 		ctr++;
+		maxIndex = ctr;
 	}
+}
+
+void inPlaceMergeSort(int* arr, int size) {
+	
 }
