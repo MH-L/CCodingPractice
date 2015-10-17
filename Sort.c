@@ -55,7 +55,7 @@ void inPlaceQuickSort(int* arr, int size) {
 	int pivot = *arr;
 	int forwardCounter = 1;
 	int backwardCounter = size - 1;
-	while (forwardCounter < backwardCounter) {
+	while (forwardCounter <= backwardCounter) {
 		if (arr[forwardCounter] <= pivot) {
 			int temp = arr[forwardCounter];
 			arr[forwardCounter] = pivot;
@@ -66,7 +66,7 @@ void inPlaceQuickSort(int* arr, int size) {
 			arr[backwardCounter] = arr[forwardCounter];
 			arr[forwardCounter] = temp;
 			backwardCounter --;
-		}
+		}	
 	}
 	inPlaceQuickSort(arr, forwardCounter - 1);
 	inPlaceQuickSort(arr + backwardCounter, size - forwardCounter);
