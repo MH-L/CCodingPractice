@@ -63,7 +63,6 @@ void inPlaceSelectionSort(int* arr, int size) {
 void inPlaceQuickSort(int* arr, int size) {
 	if (size <= 1)
 		return;
-	printf("size is: %d\n", size);
 	int pivot = *arr;
 	int forwardCounter = 1;
 	int backwardCounter = size - 1;
@@ -81,5 +80,12 @@ void inPlaceQuickSort(int* arr, int size) {
 		}	
 	}
 	inPlaceQuickSort(arr, forwardCounter - 1);
-	inPlaceQuickSort(arr + backwardCounter, size - forwardCounter);
+	inPlaceQuickSort(arr + backwardCounter + 1, size - forwardCounter);
 }
+
+void printArray(int* arr, int size) {
+	printf("The content of the array is:\n");
+	for (int i = 0; i < size; i++)
+		printf("%d,", arr[i]);
+	printf("\n");
+} 
