@@ -8,7 +8,7 @@ int main() {
 	arr[4] = 10;
 	arr[5] = 12;
 	printf("%d,%d,%d,%d,%d,%d\n", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
-	inPlaceSelectionSort(arr, 6);
+	inPlaceQuickSort(arr, 6);
 	printf("%d,%d,%d,%d,%d,%d", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
 }
 
@@ -49,6 +49,25 @@ void inPlaceSelectionSort(int* arr, int size) {
 	}
 }
 
-void inPlaceMergeSort(int* arr, int size) {
-	
+void inPlaceQuickSort(int* arr, int size) {
+	if (size <= 1)
+		return;
+	int pivot = *arr;
+	int forwardCounter = 1;
+	int backwardCounter = size - 1;
+	while (forwardCounter < backwardCounter) {
+		if (arr[forwardCounter] <= pivot) {
+			int temp = arr[forwardCounter];
+			arr[forwardCounter] = pivot;
+			arr[forwardCounter - 1] = temp;
+			forwardCounter ++;
+		} else {
+			int temp = arr[backwardCounter];
+			arr[backwardCounter] = arr[forwardCounter];
+			arr[forwardCounter] = temp;
+			backwardCounter --;
+		}
+	}
+	inPlaceQuickSort(arr, forwardCounter - 1);
+	inPlaceQuickSort(arr + backwardCounter, size - forwardCounter);
 }
