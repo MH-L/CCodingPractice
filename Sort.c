@@ -1,15 +1,26 @@
-#include<stdio.h>
+#include <stdio.h>
 int main() {
-	int* arr = (int*) malloc(6*sizeof(int));
+	int* arr = (int*) malloc(10*sizeof(int));
 	arr[0] = 13;
 	arr[1] = 9;
 	arr[2] = 18;
 	arr[3] = 15;
 	arr[4] = 10;
 	arr[5] = 12;
-	printf("%d,%d,%d,%d,%d,%d\n", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
-	inPlaceQuickSort(arr, 6);
-	printf("%d,%d,%d,%d,%d,%d", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
+	arr[6] = 7;
+	arr[7] = 19;
+	arr[8] = 3;
+	arr[9] = 14;
+	int* arr2 = (int*) malloc(8);
+	arr2[0] = 19;
+	arr2[1] = 17;
+	inPlaceQuickSort(arr2, 2);
+	printf("%d,%d\n", arr2[0], arr2[1]);
+	printf("%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5],
+			arr[6], arr[7], arr[8], arr[9]);
+	inPlaceQuickSort(arr, 10);
+	printf("%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5],
+			arr[6], arr[7], arr[8], arr[9]);
 }
 
 void inPlaceBubbleSort(int* arr, int size) {
@@ -52,6 +63,7 @@ void inPlaceSelectionSort(int* arr, int size) {
 void inPlaceQuickSort(int* arr, int size) {
 	if (size <= 1)
 		return;
+	printf("size is: %d\n", size);
 	int pivot = *arr;
 	int forwardCounter = 1;
 	int backwardCounter = size - 1;
