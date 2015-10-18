@@ -14,11 +14,11 @@ int main() {
 	int* arr2 = (int*) malloc(8);
 	arr2[0] = 19;
 	arr2[1] = 17;
-	inPlaceQuickSort(arr2, 2);
+	mergeSort(arr2, 2);
 	printf("%d,%d\n", arr2[0], arr2[1]);
 	printf("%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5],
 			arr[6], arr[7], arr[8], arr[9]);
-	inPlaceQuickSort(arr, 10);
+	mergeSort(arr, 10);
 	printf("%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5],
 			arr[6], arr[7], arr[8], arr[9]);
 }
@@ -83,9 +83,50 @@ void inPlaceQuickSort(int* arr, int size) {
 	inPlaceQuickSort(arr + backwardCounter + 1, size - forwardCounter);
 }
 
+void mergeSort(int* arr, int size) {
+	if (size <= 1)
+		return;
+	int mid = size / 2;
+	mergeSort(arr, mid);
+	mergeSort(arr + mid, size - mid);
+	int leftCtr = 0;
+	int rightCtr = mid;
+	int ctr = 0;
+	int* newArr = (int*) malloc(size*sizeof(int));
+	while (leftCtr < mid && rightCtr < size) {
+		if (arr[leftCtr] < arr[rightCtr]) {
+			newArr[ctr] = arr[rightCtr];
+			rightCtr++;
+		} else {
+			newArr[ctr] = arr[leftCtr];
+			leftCtr ++;
+		}
+		ctr ++;
+	}
+	if (leftCtr < mid) {
+		while (leftCtr < mid) {
+			newArr[ctr] = arr[leftCtr];
+			leftCtr ++;
+			ctr ++;
+		}
+	} else {
+		while (rightCtr < size) {
+			newArr[ctr] = arr[rightCtr];
+			rightCtr ++;
+			ctr ++;
+		}
+	}
+	int counter = 0;
+	while (counter < size) {
+		arr[counter] = newArr[counter];
+		counter ++;
+	}
+	free(newArr);
+}
+
 void printArray(int* arr, int size) {
 	printf("The content of the array is:\n");
 	for (int i = 0; i < size; i++)
 		printf("%d,", arr[i]);
 	printf("\n");
-} 
+}
