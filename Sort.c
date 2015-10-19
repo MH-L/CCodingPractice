@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "sort.h"
 int main() {
 	int* arr = (int*) malloc(10*sizeof(int));
 	arr[0] = 13;
@@ -21,6 +22,7 @@ int main() {
 	mergeSort(arr, 10);
 	printf("%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5],
 			arr[6], arr[7], arr[8], arr[9]);
+	printf("%d", kthstatistic(arr, 10));
 }
 
 void inPlaceBubbleSort(int* arr, int size) {
@@ -129,4 +131,55 @@ void printArray(int* arr, int size) {
 	for (int i = 0; i < size; i++)
 		printf("%d,", arr[i]);
 	printf("\n");
+}
+
+int median(int* arr, int size) {
+	if (size == 1)
+		return arr[0];
+	int statistic = size / 2;
+	int pivot = *arr;
+	int forwardCounter = 1;
+	int backwardCounter = size - 1;
+	while (forwardCounter <= backwardCounter) {
+		if (arr[forwardCounter] <= pivot) {
+			int temp = arr[forwardCounter];
+			arr[forwardCounter] = pivot;
+			arr[forwardCounter - 1] = temp;
+			forwardCounter ++;
+		} else {
+			int temp = arr[backwardCounter];
+			arr[backwardCounter] = arr[forwardCounter];
+			arr[forwardCounter] = temp;
+			backwardCounter --;
+		}	
+	}
+}
+
+int kthstatistic(int* arr, int size, int k) {
+	// k == 1 -- largest, k == size -- smallest.
+	if (size == 1)
+		return arr[0];
+	int pivot = *arr;
+	int forwardCounter = 1;
+	int backwardCounter = size - 1;
+	while (forwardCounter <= backwardCounter) {
+		if (arr[forwardCounter] <= pivot) {
+			int temp = arr[forwardCounter];
+			arr[forwardCounter] = pivot;
+			arr[forwardCounter - 1] = temp;
+			forwardCounter ++;
+		} else {
+			int temp = arr[backwardCounter];
+			arr[backwardCounter] = arr[forwardCounter];
+			arr[forwardCounter] = temp;
+			backwardCounter --;
+		}	
+	}
+	
+	if (k == forwardCounter - 1)
+		return pivot;
+	else if (k >= forwardCounter)
+		return kthstatistic(arr + forwardCounter, size - forwardCounter, k - forwardCounter);
+	else
+		return kthstatistic(arr, forwardCounter - 1, k);
 }

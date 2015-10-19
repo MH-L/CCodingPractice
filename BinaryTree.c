@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "sort.h"
 typedef struct BTree binaryTree;
 struct BTree {
 	int val;
@@ -7,11 +8,17 @@ struct BTree {
 };
 
 int main() {
-	
+
 }
 
 int find(binaryTree* tree, int value) {
-	
+	if (tree == NULL)
+		return 0;
+	if (tree->val == value)
+		return 1;
+	if (tree->val >= value)
+		return find(tree->left, value);
+	return find(tree->right, value);
 }
 
 void insert(binaryTree* tree, int toInsert) {
@@ -25,4 +32,9 @@ void insert(binaryTree* tree, int toInsert) {
 	} else {
 		insert(tree->left, toInsert);
 	}
+}
+
+binaryTree* build(int* arr, int size) {
+	inPlaceQuickSort(arr, size);
+	printf("hehe");
 }

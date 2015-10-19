@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "shuffle.h"
 #define DEFAULT_SIZE 200
 int main() {
 	int* arr = (int*) malloc(DEFAULT_SIZE * sizeof(int));
